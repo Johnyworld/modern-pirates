@@ -1,0 +1,20 @@
+{
+  "name": "modern-pirates",
+  "version": "1.0.0",
+  "description": "Modern Pirates Game",
+  "main": "mp.js",
+  "scripts": {
+    "build": "webpack",
+    "devserver": "webpack-dev-server --open --progress"
+  },
+  "author": "Johny Kim",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
+  }
+}
