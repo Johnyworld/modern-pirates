@@ -72,10 +72,7 @@ const gameStateTitle = () => {
 
 // 게임 리셋
 const gameStateSetLevel = () => {
-    canvasPrts.animate([
-        { 'opacity': 0 },
-        { 'opacity': 1 }
-    ], { duration: 1000 });
+    canvasPrts.style.opacity = 1;
     cannonBalls = [];
     enemies = [];
     WIND.x = 0;
@@ -101,10 +98,7 @@ const gameStatePlayLevel = () => {
 
 // 게임 오버
 const gameStateGameOver = () => {
-    canvasPrts.animate([
-        { 'opacity': 1 },
-        { 'opacity': 0 }
-    ], { duration: 1000 });
+    canvasPrts.style.opacity = 0;
     renderGameOver();
     removeKeyStates();
     clearrespawnEnemies();
