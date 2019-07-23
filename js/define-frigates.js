@@ -1,4 +1,4 @@
-import { WIND, playerA } from '../index';
+import { WIND, playerA, fonts } from '../index';
 
 class DefineFrigates {
     constructor(ctx, Image) {
@@ -53,7 +53,7 @@ class DefineFrigates {
 
         this.ctx.textAlign = "center";
         this.ctx.fillStyle = "#2064e2";
-        this.ctx.fillText(this.hp, this.pos.x+this.width/2, this.pos.y + this.height + 20);
+        this.ctx.fillText(this.hp, this.pos.x+this.width/2, this.pos.y + this.height + fonts.showHp);
     }  
 
     update() {

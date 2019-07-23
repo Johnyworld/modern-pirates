@@ -1,4 +1,4 @@
-import { WIND } from '../index';
+import { WIND, fonts } from '../index';
 
 class DefinePirates {
     constructor(ctx, Image) {
@@ -35,7 +35,7 @@ class DefinePirates {
 
         this.ctx.textAlign = "center";
         this.ctx.fillStyle = "#2064e2";
-        this.ctx.fillText(this.hp, this.pos.x+this.width/2, this.pos.y + this.height + 20);
+        this.ctx.fillText(this.hp, this.pos.x+this.width/2, this.pos.y + this.height + fonts.showHp);
     }  
 
     update() {

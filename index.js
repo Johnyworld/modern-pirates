@@ -17,6 +17,40 @@ const canvasPrts = document.getElementById('jsCanvasPirates');
 const ctxPrts = canvasPrts.getContext('2d', { alpha: false });
 ctxPrts.imageSmoothingEnabled = false;
 
+// 확대 방지
+document.documentElement.addEventListener('touchstart', function (event) {
+    if (event.touches.length > 1) {
+        event.preventDefault();
+    }
+}, false);
+
+var lastTouchEnd = 0;
+document.documentElement.addEventListener('touchend', function (event) {
+    var now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+      event.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false);
+
+// 폰트
+export let fonts = {}
+if ( window.innerWidth < 767 ) {
+    fonts = {
+        title : '90px Open Sans',
+        subhead : '50px Open Sans',
+        normal : '28px Open Sans',
+        showHp : 35,
+    }
+} else {
+    fonts = {
+        title : '52px Open Sans',
+        subhead : '32px Open Sans',
+        normal : '16px Open Sans',
+        showHp : 20,
+    }
+}
+
 // 캔버스 크기
 canvasPrts.width = 1024;
 canvasPrts.height = 400;
@@ -68,11 +102,11 @@ const switchGameState = (newState) => {
 const gameStateTitle = () => {
     renderTitle();
     document.addEventListener('keydown', startKeydown);
+    canvasPrts.addEventListener('click', gameStart);
 }
 
 // 게임 리셋
 const gameStateSetLevel = () => {
-    canvasPrts.style.opacity = 1;
     cannonBalls = [];
     enemies = [];
     WIND.x = 0;
@@ -91,27 +125,32 @@ const gameStatePlayLevel = () => {
     checkCollision();
     checkGameOver();
     render();
-    if (keyMapIndex > 0) {
+    if (keyMapIndex > 0 && window.innerWidth > 1023) {
         renderKeymap();
     }
 }
 
 // 게임 오버
 const gameStateGameOver = () => {
-    canvasPrts.style.opacity = 0;
     renderGameOver();
     removeKeyStates();
     clearrespawnEnemies();
     document.addEventListener('keydown', startKeydown);
+    canvasPrts.addEventListener('click', gameStart);
 }
 
 // 스페이스 누르면 게임 시작
+const gameStart = () => {
+    event.preventDefault();
+    document.removeEventListener('keydown', startKeydown);
+    canvasPrts.removeEventListener('click', gameStart);
+    switchGameState(GAME_STATE_NEW_LEVEL);
+}
+
 const startKeydown = (event) => {
     let key = event.keyCode;
     if (key === 32) {
-        event.preventDefault();
-        document.removeEventListener('keydown', startKeydown);
-        switchGameState(GAME_STATE_NEW_LEVEL);
+        gameStart();
     }
 }
 
@@ -129,10 +168,10 @@ const renderTitle = () => {
     ctxPrts.drawImage(titleImage, canvasPrts.width / 2 - titleImage.width / 2, canvasPrts.height / 2 - titleImage.height / 2 - 15);
 
     // Press Start
-    ctxPrts.font = "16px Open Sans";
+    ctxPrts.font = fonts.normal;
     ctxPrts.textAlign = "center";
     ctxPrts.fillStyle = "#864f6e";
-    ctxPrts.fillText("Press spacebar to start", canvasPrts.width / 2, canvasPrts.height / 2 + 110);
+    ctxPrts.fillText("Press spacebar or screen to start", canvasPrts.width / 2, canvasPrts.height / 2 + 110);
 }
 
 // 키 배치 보여주기
@@ -152,22 +191,22 @@ const renderGameOver = () => {
     // 제목
     ctxPrts.fillStyle = "#ffffff";
     ctxPrts.textAlign = "center";
-    ctxPrts.font = "52px Open Sans";
+    ctxPrts.font = fonts.title;
     ctxPrts.fillText("GAME OVER", canvasPrts.width / 2, canvasPrts.height / 2);
 
     // Press Start
-    ctxPrts.font = "16px Open Sans";
+    ctxPrts.font = fonts.normal;
     ctxPrts.textAlign = "right";
     ctxPrts.fillText("Your Score : ", canvasPrts.width / 2 - 5, canvasPrts.height / 2 + 50);
 
-    ctxPrts.font = "32px Open Sans";
+    ctxPrts.font = fonts.subhead;
     ctxPrts.fillStyle = "#3976fe";
     ctxPrts.fillText(SCORE, canvasPrts.width / 2 + 75, canvasPrts.height / 2 + 55);
 
-    ctxPrts.font = "16px Open Sans";
+    ctxPrts.font = fonts.normal;
     ctxPrts.fillStyle = "#864f6e";
     ctxPrts.textAlign = "center";
-    ctxPrts.fillText("스페이스바를 누르면 재도전", canvasPrts.width / 2, canvasPrts.height / 2 + 110);
+    ctxPrts.fillText("Press Screen or Spacebar to Restart", canvasPrts.width / 2, canvasPrts.height / 2 + 110);
 }
 
 // 충돌검사 함수
@@ -338,9 +377,6 @@ const runningGame = () => {
 }
 
 runningGame();
-
-
-
 
 // TO DO
 

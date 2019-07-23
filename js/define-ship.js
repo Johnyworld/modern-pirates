@@ -1,4 +1,4 @@
-import { WIND } from '../index';
+import { WIND, fonts } from '../index';
 
 class DefineShip {
     constructor(ctx, canvas, Image)  {
@@ -51,7 +51,7 @@ class DefineShip {
 
         this.ctx.textAlign = "center";
         this.ctx.fillStyle = "#2064e2";
-        this.ctx.fillText(this.hp, this.pos.x+this.width/2-3, this.pos.y + this.height + 20);
+        this.ctx.fillText(this.hp, this.pos.x+this.width/2-3, this.pos.y + this.height + fonts.showHp);
     }  
 
     update() {

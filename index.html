@@ -3,15 +3,43 @@
     <head>
         <title>Modern Pirates</title>
         <link rel="shortcut icon" href="/images/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         <style>
-            body { background-color: #111; margin: 0; }
+            @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+            /* Resets */
+            body, ul, li, button { margin: 0; padding: 0; }
+            li { list-style-type: none; }
+            input[type=submit] {-webkit-appearance:none;}
+
+            /* Styles */
+            body { background-color: #111; overflow: hidden; }
             canvas { image-rendering: pixelated; width: 100%; transition: opacity 1s; }
-            img { display: block; padding: 2%; width: 800px; }
+            .btns-wrapper { margin: -5px; overflow: hidden; }
+            .btns { width: 12.5%; float: left; padding: 5px; box-sizing: border-box; }
+            .btns.fire { width: 25%; }
+            .btns button { width: 100%; text-align: center; font-size: 25px; border: 1px solid #555; background-color: #111; color: #888; outline: none; }
+            .btns img { max-width: 90px; width: 7vw; display: block; margin: 0 auto; }
+            .btns.fire img { max-width: 180px; width: 14vw; }
+
+            /* Mobile */
+            @media screen and ( max-width: 767px ) {
+                button { font-size: 16px; white-space: nowrap; }
+                .btns-wrapper { margin: -2px; }
+                .btns { padding: 2px; }
+            } 
         </style>
     </head>
     <body>
         <canvas id="jsCanvasPirates"></canvas>
-        <img className="modern-pirates-keymap2" src="images/keymap2.png" alt="modern-pirates-keymap2" />
         <script type="text/javascript" src="/dist/bundle.js"></script>
+        <ul class="btns-wrapper">
+            <li class="btns"><button class="" id="jsKeyAngleDown"><img src="/images/key-angle-down.jpg" /></button></li>
+            <li class="btns"><button class="" id="jsKeyAngleUp"><img src="/images/key-angle-up.jpg" /></button></li>
+            <li class="btns"><button class="" id="jsKeyEngineDown"><img src="/images/key-engine-down.jpg" /></button></li>
+            <li class="btns"><button class="" id="jsKeyEngineUp"><img src="/images/key-engine-up.jpg" /></button></li>
+            <li class="btns"><button class="" id="jsKeyPowerDown"><img src="/images/key-power-down.jpg" /></button></li>
+            <li class="btns"><button class="" id="jsKeyPowerUp"><img src="/images/key-power-up.jpg" /></button></li>
+            <li class="btns fire"><button class="" id="jsKeyFire"><img src="/images/key-fire.jpg" /></button></li>
+        </ul>
     </body>
 </html>
