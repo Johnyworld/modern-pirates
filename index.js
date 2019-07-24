@@ -199,9 +199,12 @@ const renderGameOver = () => {
     ctxPrts.textAlign = "right";
     ctxPrts.fillText("Your Score : ", canvasPrts.width / 2 - 5, canvasPrts.height / 2 + 50);
 
+    let scoreX;
+    if ( window.innerWidth < 767 ) { scoreX = 150 } 
+    else { scoreX = 75 }
     ctxPrts.font = fonts.subhead;
     ctxPrts.fillStyle = "#3976fe";
-    ctxPrts.fillText(SCORE, canvasPrts.width / 2 + 75, canvasPrts.height / 2 + 55);
+    ctxPrts.fillText(SCORE, canvasPrts.width / 2 + scoreX, canvasPrts.height / 2 + 55);
 
     ctxPrts.font = fonts.normal;
     ctxPrts.fillStyle = "#864f6e";

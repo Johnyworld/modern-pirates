@@ -4,7 +4,7 @@ export const textBoard = (ctxPrts) => {
 
     let windDir = '';
     
-    const playerUI = { x: 20, y: 30 };
+    let playerUI = { x: 20, y: 30 };
 
     let line1 = 20;
     let line2 = 40;
@@ -12,9 +12,10 @@ export const textBoard = (ctxPrts) => {
     let line4 = 80;
     let line5 = 100;
     let column1 = 10;
-    let column2 = 100;
+    let column2 = 110;
 
     if ( window.innerWidth < 767 ) {
+        playerUI = { x: 20, y: 42 };
         line1 = 30;
         line2 = 60;
         line3 = 90;
@@ -43,7 +44,7 @@ export const textBoard = (ctxPrts) => {
     ctxPrts.fillStyle = "white";
     ctxPrts.textAlign = "left";
     ctxPrts.fillText("Battle Ship", playerUI.x, playerUI.y);
-    ctxPrts.fillText("Wind", column2*2, 30);
+    ctxPrts.fillText("Wind", column2*2, playerUI.y);
 
     // 플레이어 스테이터스
     ctxPrts.font = fonts.normal;
@@ -71,6 +72,6 @@ export const textBoard = (ctxPrts) => {
 
     // 바람
     ctxPrts.font = fonts.subhead;
-    ctxPrts.fillText(windDir, column2*2+line3, 36);
+    ctxPrts.fillText(windDir, column2*2+line3, playerUI.y + playerUI.y/5);
     ctxPrts.font = fonts.normal;
 }
