@@ -1,37 +1,37 @@
 import { playerA, cannonBalls } from '../index';
 import CannonBall from './cannon-ball';
 
-const engineDown = () => {
-    if ( playerA.ing.engn === false && playerA.vel.x > -playerA.maxSpeed ) {
-        playerA.ing.engn = true;
-        let max = playerA.vel.x - 0.1;
-        const frame = () => {
-            if ( playerA.vel.x <= max+0.01 ) {
-                playerA.ing.engn = false;
-                playerA.vel.x = max;
-                clearInterval(id);
-            } else {
-                playerA.vel.x -= 0.003;
-            }
-        }
-        let id = setInterval(frame, 40);
+// 엔진 누름 상태 추적
+const engineState = { left: false, right: false };
+let engineInterval = null;
+
+const engineTick = () => {
+    if (!playerA) return;
+    if (engineState.left && playerA.vel.x > -playerA.maxSpeed) {
+        playerA.vel.x = Math.max(-playerA.maxSpeed, playerA.vel.x - 0.002);
+    }
+    if (engineState.right && playerA.vel.x < playerA.maxSpeed) {
+        playerA.vel.x = Math.min(playerA.maxSpeed, playerA.vel.x + 0.002);
     }
 }
 
-const engineUp = () => {
-    if ( playerA.ing.engn === false && playerA.vel.x < playerA.maxSpeed ) {
-        playerA.ing.engn = true;
-        let max = playerA.vel.x + 0.1;
-        const frame = () => {
-            if ( playerA.vel.x >= max ) {
-                playerA.ing.engn = false;
-                playerA.vel.x = max;
-                clearInterval(id);
-            } else {
-                playerA.vel.x += 0.003;
-            }
-        }
-        let id = setInterval(frame, 40);
+const setEngineLeft = (active) => {
+    engineState.left = active;
+    if (active && !engineInterval) {
+        engineInterval = setInterval(engineTick, 16);
+    } else if (!active && !engineState.right) {
+        clearInterval(engineInterval);
+        engineInterval = null;
+    }
+}
+
+const setEngineRight = (active) => {
+    engineState.right = active;
+    if (active && !engineInterval) {
+        engineInterval = setInterval(engineTick, 16);
+    } else if (!active && !engineState.left) {
+        clearInterval(engineInterval);
+        engineInterval = null;
     }
 }
 
@@ -96,14 +96,14 @@ const powerDown = () => {
     }
 }
 
-const gameKeys = (event) => {
+const gameKeysDown = (event) => {
     const code = event.code;
 
     // EngineDown : Arrow left, A
-    if (code === 'ArrowLeft' || code === 'KeyA') { engineDown(); }
+    if (code === 'ArrowLeft' || code === 'KeyA') { setEngineLeft(true); }
 
     // EngineUp : Arrow right, D
-    if (code === 'ArrowRight' || code === 'KeyD') { engineUp(); }
+    if (code === 'ArrowRight' || code === 'KeyD') { setEngineRight(true); }
 
     // Angle Up : Arrow up, W
     if (code === 'ArrowUp' || code === 'KeyW') { angleUp(); }
@@ -119,6 +119,12 @@ const gameKeys = (event) => {
 
     // Power Down : <
     if (code === 'Comma') { powerDown(); }
+}
+
+const gameKeysUp = (event) => {
+    const code = event.code;
+    if (code === 'ArrowLeft' || code === 'KeyA') { setEngineLeft(false); }
+    if (code === 'ArrowRight' || code === 'KeyD') { setEngineRight(false); }
 }
 
 const handleMouseMove = (event) => {
@@ -153,14 +159,23 @@ const handleTouchMove = (event) => {
 
 export const keyStates = () => {
     const canvas = document.getElementById('jsCanvasPirates');
-    document.addEventListener( 'keydown', gameKeys );
+    document.addEventListener( 'keydown', gameKeysDown );
+    document.addEventListener( 'keyup', gameKeysUp );
     canvas.addEventListener( 'mousemove', handleMouseMove );
     canvas.addEventListener( 'touchmove', handleTouchMove );
     canvas.addEventListener( 'click', fire );
-    jsKeyEngineDown.addEventListener( 'click', engineDown )
+    jsKeyEngineDown.addEventListener( 'mousedown', () => setEngineLeft(true) );
+    jsKeyEngineDown.addEventListener( 'mouseup', () => setEngineLeft(false) );
+    jsKeyEngineDown.addEventListener( 'mouseleave', () => setEngineLeft(false) );
+    jsKeyEngineDown.addEventListener( 'touchstart', () => setEngineLeft(true) );
+    jsKeyEngineDown.addEventListener( 'touchend', () => setEngineLeft(false) );
+    jsKeyEngineUp.addEventListener( 'mousedown', () => setEngineRight(true) );
+    jsKeyEngineUp.addEventListener( 'mouseup', () => setEngineRight(false) );
+    jsKeyEngineUp.addEventListener( 'mouseleave', () => setEngineRight(false) );
+    jsKeyEngineUp.addEventListener( 'touchstart', () => setEngineRight(true) );
+    jsKeyEngineUp.addEventListener( 'touchend', () => setEngineRight(false) );
     jsKeyAngleDown.addEventListener( 'click', angleDown )
     jsKeyAngleUp.addEventListener( 'click', angleUp )
-    jsKeyEngineUp.addEventListener( 'click', engineUp )
     jsKeyPowerUp.addEventListener( 'click', powerUp )
     jsKeyPowerDown.addEventListener( 'click', powerDown )
     jsKeyFire.addEventListener( 'click', fire )
@@ -168,10 +183,13 @@ export const keyStates = () => {
 
 export const removeKeyStates = () => {
     const canvas = document.getElementById('jsCanvasPirates');
-    document.removeEventListener( 'keydown', gameKeys );
+    document.removeEventListener( 'keydown', gameKeysDown );
+    document.removeEventListener( 'keyup', gameKeysUp );
     canvas.removeEventListener( 'mousemove', handleMouseMove );
     canvas.removeEventListener( 'touchmove', handleTouchMove );
     canvas.removeEventListener( 'click', fire );
+    setEngineLeft(false);
+    setEngineRight(false);
 }
 
 // export default keyStates;

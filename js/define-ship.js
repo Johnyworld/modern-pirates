@@ -64,6 +64,29 @@ class DefineShip {
         this.ctx.textAlign = "center";
         this.ctx.fillStyle = "#2064e2";
         this.ctx.fillText(this.hp, this.pos.x+this.width/2-3, this.pos.y + this.height + fonts.showHp);
+
+        // 엔진 게이지
+        const gaugeHalfWidth = 20;
+        const gaugeCenterX = this.pos.x + this.width / 2;
+        const gaugeY = this.pos.y + this.height + fonts.showHp + 6;
+        const barWidth = (this.vel.x / this.maxSpeed) * gaugeHalfWidth;
+
+        // 배경 트랙
+        this.ctx.fillStyle = '#333';
+        this.ctx.fillRect(gaugeCenterX - gaugeHalfWidth, gaugeY, gaugeHalfWidth * 2, 3);
+
+        // 게이지 바 (양수: 오른쪽 파란색, 음수: 왼쪽 노란색)
+        this.ctx.fillStyle = barWidth >= 0 ? '#4af' : '#fa4';
+        this.ctx.fillRect(
+            barWidth >= 0 ? gaugeCenterX : gaugeCenterX + barWidth,
+            gaugeY,
+            Math.abs(barWidth),
+            3
+        );
+
+        // 중앙 세로선
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillRect(gaugeCenterX, gaugeY - 1, 1, 5);
     }  
 
     update() {
