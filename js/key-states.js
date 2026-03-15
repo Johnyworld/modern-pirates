@@ -96,28 +96,29 @@ const powerDown = () => {
     }
 }
 
-const gameKeys = (event, key=event.keyCode) => {
+const gameKeys = (event) => {
+    const code = event.code;
 
     // EngineDown : Arrow left, A
-    if (key === 37 || key === 65) { engineDown(); }
+    if (code === 'ArrowLeft' || code === 'KeyA') { engineDown(); }
 
     // EngineUp : Arrow right, D
-    if (key === 39 || key === 68) { engineUp(); }
+    if (code === 'ArrowRight' || code === 'KeyD') { engineUp(); }
 
     // Angle Up : Arrow up, W
-    if (key === 38 || key === 87) { angleUp(); }
+    if (code === 'ArrowUp' || code === 'KeyW') { angleUp(); }
 
     // Angle Down : Arrow down, S
-    if (key === 40 || key === 83) { angleDown(); }
+    if (code === 'ArrowDown' || code === 'KeyS') { angleDown(); }
 
     // Cannon Fire : Space bar
-    if (key === 32) { fire(); }
+    if (code === 'Space') { fire(); }
 
     // Power Up : >
-    if (key === 190) { powerUp(); }
+    if (code === 'Period') { powerUp(); }
 
     // Power Down : <
-    if (key === 188) { powerDown(); }
+    if (code === 'Comma') { powerDown(); }
 }
 
 const handleMouseMove = (event) => {

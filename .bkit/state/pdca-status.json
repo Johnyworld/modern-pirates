@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-15T06:18:19.782Z",
+  "lastUpdated": "2026-03-15T06:29:57.859Z",
   "activeFeatures": [
     "js"
   ],
@@ -15,7 +15,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-15T05:49:28.937Z",
-        "lastUpdated": "2026-03-15T06:18:19.782Z"
+        "lastUpdated": "2026-03-15T06:29:57.859Z"
       },
       "lastFile": "/Users/gimjaehwan/dev/modern-pirates/js/key-states.js"
     }
@@ -28,7 +28,7 @@
   "session": {
     "startedAt": "2026-03-15T05:39:14.148Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-15T06:18:19.782Z"
+    "lastActivity": "2026-03-15T06:29:57.859Z"
   },
   "history": [
     {
@@ -117,6 +117,12 @@
     },
     {
       "timestamp": "2026-03-15T06:18:19.782Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T06:29:57.859Z",
       "feature": "js",
       "phase": "do",
       "action": "updated"
