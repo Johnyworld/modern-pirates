@@ -366,7 +366,7 @@ const respawnEnemiesFunc = () => {
 };
 
 const respawnEnemies = () => {
-  respawnInterval = setInterval(respawnEnemiesFunc, 14000);
+  respawnInterval = setInterval(respawnEnemiesFunc, 12000);
 };
 
 const clearrespawnEnemies = () => {

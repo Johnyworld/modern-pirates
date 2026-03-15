@@ -18,7 +18,7 @@ class DefinePirates {
         }
         
         this.vel = {
-            x: -0.2 - Math.random()*.1,
+            x: -0.4 - Math.random()*.1,
             y: 0
         }
 

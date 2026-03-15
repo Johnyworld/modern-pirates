@@ -7,11 +7,12 @@ let engineInterval = null;
 
 const engineTick = () => {
     if (!playerA) return;
+    const engineVelocity = 0.004;
     if (engineState.left && playerA.vel.x > -playerA.maxSpeed) {
-        playerA.vel.x = Math.max(-playerA.maxSpeed, playerA.vel.x - 0.002);
+        playerA.vel.x = Math.max(-playerA.maxSpeed, playerA.vel.x - engineVelocity);
     }
     if (engineState.right && playerA.vel.x < playerA.maxSpeed) {
-        playerA.vel.x = Math.min(playerA.maxSpeed, playerA.vel.x + 0.002);
+        playerA.vel.x = Math.min(playerA.maxSpeed, playerA.vel.x + engineVelocity);
     }
 }
 
