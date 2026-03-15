@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-15T06:14:16.791Z",
+  "lastUpdated": "2026-03-15T06:18:19.782Z",
   "activeFeatures": [
     "js"
   ],
@@ -15,9 +15,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-15T05:49:28.937Z",
-        "lastUpdated": "2026-03-15T06:14:16.791Z"
+        "lastUpdated": "2026-03-15T06:18:19.782Z"
       },
-      "lastFile": "/Users/gimjaehwan/dev/modern-pirates/js/define-ship.js"
+      "lastFile": "/Users/gimjaehwan/dev/modern-pirates/js/key-states.js"
     }
   },
   "pipeline": {
@@ -28,7 +28,7 @@
   "session": {
     "startedAt": "2026-03-15T05:39:14.148Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-15T06:14:16.791Z"
+    "lastActivity": "2026-03-15T06:18:19.782Z"
   },
   "history": [
     {
@@ -99,6 +99,24 @@
     },
     {
       "timestamp": "2026-03-15T06:14:16.791Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T06:17:17.098Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T06:18:13.711Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T06:18:19.782Z",
       "feature": "js",
       "phase": "do",
       "action": "updated"

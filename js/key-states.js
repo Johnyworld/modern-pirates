@@ -98,17 +98,17 @@ const powerDown = () => {
 
 const gameKeys = (event, key=event.keyCode) => {
 
-    // EngineDown : Arrow left
-    if (key === 37) { engineDown(); }
+    // EngineDown : Arrow left, A
+    if (key === 37 || key === 65) { engineDown(); }
 
-    // Right : Arrow right
-    if (key === 39) { engineUp(); }
+    // EngineUp : Arrow right, D
+    if (key === 39 || key === 68) { engineUp(); }
 
-    // Angle Up : Arrow up
-    if (key === 38) { angleUp(); }
+    // Angle Up : Arrow up, W
+    if (key === 38 || key === 87) { angleUp(); }
 
-    // Angle Down : Arrow down
-    if (key === 40) { angleDown(); }
+    // Angle Down : Arrow down, S
+    if (key === 40 || key === 83) { angleDown(); }
 
     // Cannon Fire : Space bar
     if (key === 32) { fire(); }
@@ -155,6 +155,7 @@ export const keyStates = () => {
     document.addEventListener( 'keydown', gameKeys );
     canvas.addEventListener( 'mousemove', handleMouseMove );
     canvas.addEventListener( 'touchmove', handleTouchMove );
+    canvas.addEventListener( 'click', fire );
     jsKeyEngineDown.addEventListener( 'click', engineDown )
     jsKeyAngleDown.addEventListener( 'click', angleDown )
     jsKeyAngleUp.addEventListener( 'click', angleUp )
@@ -169,6 +170,7 @@ export const removeKeyStates = () => {
     document.removeEventListener( 'keydown', gameKeys );
     canvas.removeEventListener( 'mousemove', handleMouseMove );
     canvas.removeEventListener( 'touchmove', handleTouchMove );
+    canvas.removeEventListener( 'click', fire );
 }
 
 // export default keyStates;
