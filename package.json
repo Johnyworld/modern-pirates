@@ -5,7 +5,7 @@
   "main": "mp.js",
   "scripts": {
     "build": "NODE_OPTIONS=--openssl-legacy-provider webpack",
-    "devserver": "webpack-dev-server --open --progress"
+    "devserver": "NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server --open --progress"
   },
   "author": "Johny Kim",
   "license": "ISC",
