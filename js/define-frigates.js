@@ -51,9 +51,13 @@ class DefineFrigates {
             this.width, this.height,
         );
 
-        this.ctx.textAlign = "center";
-        this.ctx.fillStyle = "#2064e2";
-        this.ctx.fillText(this.hp, this.pos.x+this.width/2, this.pos.y + this.height + fonts.showHp);
+        const barY = this.pos.y - 6;
+        const hpBarWidth = this.width / 2;
+        const hpBarX = this.pos.x + this.width / 4;
+        this.ctx.fillStyle = '#333';
+        this.ctx.fillRect(hpBarX, barY, hpBarWidth, 3);
+        this.ctx.fillStyle = '#f44';
+        this.ctx.fillRect(hpBarX, barY, hpBarWidth * (this.hp / this.maxHp), 3);
     }  
 
     update() {

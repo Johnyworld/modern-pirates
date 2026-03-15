@@ -61,14 +61,19 @@ class DefineShip {
         this.ctx.lineTo(originX + lineLength * Math.cos(radians), originY - lineLength * Math.sin(radians));
         this.ctx.stroke();
 
-        this.ctx.textAlign = "center";
-        this.ctx.fillStyle = "#2064e2";
-        this.ctx.fillText(this.hp, this.pos.x+this.width/2-3, this.pos.y + this.height + fonts.showHp);
+        // HP 바 (함선 위)
+        const barY = this.pos.y - 6;
+        const hpBarWidth = this.width / 2;
+        const hpBarX = this.pos.x + this.width / 4;
+        this.ctx.fillStyle = '#333';
+        this.ctx.fillRect(hpBarX, barY, hpBarWidth, 3);
+        this.ctx.fillStyle = '#2f6';
+        this.ctx.fillRect(hpBarX, barY, hpBarWidth * (this.hp / this.maxHp), 3);
 
         // 엔진 게이지
         const gaugeHalfWidth = 20;
         const gaugeCenterX = this.pos.x + this.width / 2;
-        const gaugeY = this.pos.y + this.height + fonts.showHp + 6;
+        const gaugeY = this.pos.y + this.height + 4;
         const barWidth = (this.vel.x / this.maxSpeed) * gaugeHalfWidth;
 
         // 배경 트랙
