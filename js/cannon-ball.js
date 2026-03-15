@@ -3,9 +3,9 @@ import { WIND } from '../index';
 class CannonBall {
     constructor(ctx, X, Y, Cannon, isEnemy ) {
         this.ctx = ctx;
-        this.mathCannon = Math.floor(Cannon.ang / 90 * 100) + 5;
         this.weight = 0.07;
         this.isEnemy = isEnemy;
+        this.straightFrames = 24; // 약 0.4초간 직선 비행 후 중력 적용
 
         this.width = 4;
         this.height = 2;
@@ -15,14 +15,13 @@ class CannonBall {
             y: Y
         }
 
-        this.pow = {
-            y : - (Cannon.pow + 4) * this.mathCannon / 100,
-            x : (Cannon.pow + 4) * (100 - this.mathCannon) / 100,
-        }
+        const radians = Cannon.ang * Math.PI / 180;
+        const speed = (Cannon.pow + 4) * 0.5;
+        const scatter = Math.random() / Cannon.accuracy;
 
         this.vel = {
-            x : this.pow.x + Math.random() / Cannon.accuracy,
-            y : this.pow.y + Math.random() / Cannon.accuracy
+            x : speed * Math.cos(radians) + scatter,
+            y : -speed * Math.sin(radians) + scatter,
         }
 
         if ( this.isEnemy ) {
@@ -40,10 +39,14 @@ class CannonBall {
     }
 
     update() {
-        this.vel.y += this.weight;
-        this.pos.x += this.vel.x + WIND.x/3 ;
+        if (this.straightFrames > 0) {
+            this.straightFrames--;
+        } else {
+            this.vel.y += this.weight;
+        }
+        this.pos.x += this.vel.x + WIND.x/3;
         this.pos.y += this.vel.y;
-        this.draw();   
+        this.draw();
     }
 }
 

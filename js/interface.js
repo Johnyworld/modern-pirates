@@ -66,7 +66,7 @@ export const textBoard = (ctxPrts) => {
     // 플레이어 스테이터스 최대수치
     ctxPrts.textAlign = "left";
     ctxPrts.fillStyle = "#555555";
-    ctxPrts.fillText('/ 20 - 70', playerUI.x+column2+5, playerUI.y+line1);
+    ctxPrts.fillText('/ 0 - 80', playerUI.x+column2+5, playerUI.y+line1);
     ctxPrts.fillText('/ '+playerA.cannon.maxPow, playerUI.x+column2+5, playerUI.y+line2);
     ctxPrts.fillText('/ ' +playerA.maxSpeed*100, playerUI.x+column2+5, playerUI.y+line3);
 

@@ -1,9 +1,25 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-15T05:39:14.148Z",
-  "activeFeatures": [],
-  "primaryFeature": null,
-  "features": {},
+  "lastUpdated": "2026-03-15T06:14:16.791Z",
+  "activeFeatures": [
+    "js"
+  ],
+  "primaryFeature": "js",
+  "features": {
+    "js": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-15T05:49:28.937Z",
+        "lastUpdated": "2026-03-15T06:14:16.791Z"
+      },
+      "lastFile": "/Users/gimjaehwan/dev/modern-pirates/js/define-ship.js"
+    }
+  },
   "pipeline": {
     "currentPhase": 1,
     "level": "Dynamic",
@@ -12,7 +28,80 @@
   "session": {
     "startedAt": "2026-03-15T05:39:14.148Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-15T05:39:14.148Z"
+    "lastActivity": "2026-03-15T06:14:16.791Z"
   },
-  "history": []
+  "history": [
+    {
+      "timestamp": "2026-03-15T05:49:28.937Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T05:59:36.920Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T06:03:04.033Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T06:03:05.515Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T06:03:08.971Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T06:03:13.528Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T06:05:40.938Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T06:05:49.404Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T06:08:00.456Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T06:08:55.444Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T06:12:05.274Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-15T06:14:16.791Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    }
+  ]
 }

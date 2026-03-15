@@ -33,7 +33,7 @@ class DefineShip {
 
         this.cannon = {
             pow: 3,
-            maxPow: 5,
+            maxPow: 10,
             ang: 30,
             rld: 2500,
             accuracy: 5,
@@ -48,6 +48,18 @@ class DefineShip {
             this.pos.x, this.pos.y, 
             this.width, this.height
         );
+
+        // 각도 표시선
+        const radians = this.cannon.ang * Math.PI / 180;
+        const originX = this.pos.x + this.width;
+        const originY = this.pos.y + this.height / 2;
+        this.ctx.strokeStyle = 'white';
+        this.ctx.lineWidth = 1;
+        this.ctx.beginPath();
+        this.ctx.moveTo(originX, originY);
+        const lineLength = 4 + this.cannon.pow * 2;
+        this.ctx.lineTo(originX + lineLength * Math.cos(radians), originY - lineLength * Math.sin(radians));
+        this.ctx.stroke();
 
         this.ctx.textAlign = "center";
         this.ctx.fillStyle = "#2064e2";

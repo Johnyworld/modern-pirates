@@ -37,7 +37,7 @@ const engineUp = () => {
 
 const angleUp = () => {
     event.preventDefault();
-    if ( playerA.ing.ang === false && playerA.cannon.ang < 70 ) {
+    if ( playerA.ing.ang === false && playerA.cannon.ang < 80 ) {
         playerA.ing.ang = true;
         let max = playerA.cannon.ang + 5;
         const frame = () => {
@@ -55,7 +55,7 @@ const angleUp = () => {
 
 const angleDown = () => {
     event.preventDefault();
-    if ( playerA.ing.ang === false && playerA.cannon.ang > 20 ) {
+    if ( playerA.ing.ang === false && playerA.cannon.ang > 0 ) {
         playerA.ing.ang = true;
         let max = playerA.cannon.ang - 5;
         const frame = () => {
@@ -120,8 +120,41 @@ const gameKeys = (event, key=event.keyCode) => {
     if (key === 188) { powerDown(); }
 }
 
+const handleMouseMove = (event) => {
+    if (!playerA) return;
+    const canvas = document.getElementById('jsCanvasPirates');
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = (event.clientX - rect.left) * (canvas.width / rect.width);
+    const mouseY = (event.clientY - rect.top) * (canvas.height / rect.height);
+
+    // 함선 포구 위치 기준점
+    const originX = playerA.pos.x + playerA.width;
+    const originY = playerA.pos.y + playerA.height / 2;
+    const dx = mouseX - originX;
+    const dy = mouseY - originY;
+
+    // 각도: 함선 → 마우스 방향의 실제 각도 (캔버스 Y축 반전 보정)
+    const rawAngle = Math.atan2(-dy, dx) * (180 / Math.PI);
+    playerA.cannon.ang = Math.min(80, Math.max(0, rawAngle));
+
+    // 파워: 함선~마우스 거리 기준, 화면 절반(512px) 거리에서 최대 파워
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    const halfScreen = canvas.width / 2;
+    const newPow = 1 + (distance / halfScreen) * (playerA.cannon.maxPow - 1);
+    playerA.cannon.pow = Math.min(playerA.cannon.maxPow, Math.max(1, Math.round(newPow)));
+}
+
+const handleTouchMove = (event) => {
+    if (!playerA) return;
+    const touch = event.touches[0];
+    handleMouseMove(touch);
+}
+
 export const keyStates = () => {
+    const canvas = document.getElementById('jsCanvasPirates');
     document.addEventListener( 'keydown', gameKeys );
+    canvas.addEventListener( 'mousemove', handleMouseMove );
+    canvas.addEventListener( 'touchmove', handleTouchMove );
     jsKeyEngineDown.addEventListener( 'click', engineDown )
     jsKeyAngleDown.addEventListener( 'click', angleDown )
     jsKeyAngleUp.addEventListener( 'click', angleUp )
@@ -132,7 +165,10 @@ export const keyStates = () => {
 }
 
 export const removeKeyStates = () => {
+    const canvas = document.getElementById('jsCanvasPirates');
     document.removeEventListener( 'keydown', gameKeys );
+    canvas.removeEventListener( 'mousemove', handleMouseMove );
+    canvas.removeEventListener( 'touchmove', handleTouchMove );
 }
 
 // export default keyStates;
