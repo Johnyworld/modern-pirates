@@ -72,7 +72,11 @@ class DefineFrigates {
       this.vel.x = 0.1;
     }
 
-    this.cannon.pow = 1 + WIND.x / 7 + (this.pos.x - playerA.pos.x) / 140;
+    const randomValueGap = 40; // 40 means 80 - 120
+    const randomValue = Math.floor(Math.random() * randomValueGap);
+    const random = 100 - randomValueGap / 2 + randomValue;
+
+    this.cannon.pow = 1 + WIND.x / 7 + (this.pos.x - playerA.pos.x) / random;
     this.draw();
   }
 }
