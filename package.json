@@ -4,7 +4,7 @@
   "description": "Modern Pirates Game",
   "main": "mp.js",
   "scripts": {
-    "build": "webpack",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider webpack",
     "devserver": "webpack-dev-server --open --progress"
   },
   "author": "Johny Kim",
