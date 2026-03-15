@@ -1,17 +1,106 @@
 # Modern Pirates
 
-### Concept
+> 바닐라 자바스크립트와 HTML Canvas로 만든 브라우저 기반 대포 배틀 게임
 
-현대 해적들의 침공이라는 컨셉으로 제작한 HTML Canvas 게임입니다.
+**[지금 플레이하기](https://modern-pirates.vercel.app/)**
 
-This Game was created with HTML Canvas with the concept of invasion of modern pirates.
+---
 
-### Introdution
+## 소개
 
-모던 자바스크립트(ES6+)를 연습하기 위해 만들기 시작했습니다. 지금까지 배우고 연습했던 JS, Canvas를 테스트해보기 위한 시간이기도 했기 때문에 대부분의 코드를 직접 만들었습니다. Game State Machine은 책의 도움을 받았습니다. 그 대신 내용을 완전히 이해한 뒤 사용했습니다. 충돌&피격판정, 파워, 중력, 각도, 바람, 클래스 등은 직접 고민하여 구현했습니다.
+현대 해적들의 침공을 막아라! HTML Canvas로 제작한 해적 함선 대포 배틀 게임입니다.
 
-This game created for practice modern JS(es6+). and I created most of the code myself because I wanted to test my coding skills. I got help to make Game State Machine from book. Instead, I fully understood the content and then used it. and I created code of Collision Detection, Power, Gravity, Angle, Wind, Classed my self.
+게임 엔진이나 라이브러리 없이, 모던 자바스크립트(ES6+)와 Canvas 2D API만으로 처음부터 직접 구현했습니다.
 
-### Link
+---
 
-- Game Demo Link : [View](https://modern-pirates.vercel.app/)
+## 게임 방법
+
+플레이어 함선은 화면 왼쪽에 위치합니다. 적 함선들은 오른쪽에서 접근해옵니다. 대포를 발사해 적을 격침시키세요.
+
+- 적과 충돌하거나 적의 포탄에 맞으면 HP가 감소합니다
+- 바람이 포탄의 궤도에 영향을 줍니다 — 바람 방향을 파악하고 조준하세요
+- HP가 0이 되면 게임 오버
+
+---
+
+## 조작법
+
+### 마우스 (권장)
+
+| 동작      | 입력                                             |
+| --------- | ------------------------------------------------ |
+| 각도 조절 | 캔버스 위에서 마우스 상하 이동                   |
+| 파워 조절 | 함선으로부터 마우스 거리 (절반 화면 = 최대 파워) |
+| 발사      | 캔버스 클릭                                      |
+
+### 키보드
+
+| 동작        | 키                |
+| ----------- | ----------------- |
+| 엔진 가속   | `→` / `D`         |
+| 엔진 감속   | `←` / `A`         |
+| 각도 올리기 | `↑` / `W`         |
+| 각도 내리기 | `↓` / `S`         |
+| 발사        | `Space` / `Click` |
+| 파워 올리기 | `>`               |
+| 파워 내리기 | `<`               |
+
+### 모바일
+
+화면 하단의 터치 버튼을 사용하세요.
+
+---
+
+## 주요 기능
+
+- **물리 기반 탄도** — 삼각함수(sin/cos)로 실제 각도를 계산하고, 중력 유예 후 낙하
+- **동적 바람** — 바람 속도와 방향이 실시간으로 변하며 모든 포탄에 영향
+- **마우스 조준** — 함선 → 커서 벡터로 각도 계산, 거리로 파워 결정
+- **시각적 조준선** — 함선에 현재 각도와 파워를 직관적으로 표시
+- **충돌 판정** — AABB 방식의 포탄·플레이어·적 충돌 검사
+- **데미지 공식** — 포탄 속도와 바람에 비례, 방어력만큼 감소
+- **게임 스테이트 머신** — 타이틀 → 플레이 → 게임 오버 흐름 관리
+- **적 AI** — 프리깃함은 타이머로 포격, 해적선은 돌격 및 충돌 공격
+
+---
+
+## 기술 스택
+
+- **언어**: JavaScript (ES6+)
+- **렌더링**: HTML Canvas 2D
+- **번들러**: Webpack 4 + Babel
+- **배포**: Vercel
+
+---
+
+## 구조
+
+```
+index.js              — 게임 루프, 스테이트 머신, 충돌 처리, 바람
+js/
+  define-ship.js      — 플레이어 함선 클래스
+  define-pirates.js   — 해적선 적 클래스
+  define-frigates.js  — 프리깃함 적 클래스 (포격 가능)
+  cannon-ball.js      — 포탄 물리
+  key-states.js       — 입력 처리 (키보드, 마우스, 터치)
+  interface.js        — HUD 렌더링
+```
+
+---
+
+## 개발 환경
+
+```bash
+npm install
+npm run devserver   # localhost:8080
+npm run build       # 프로덕션 번들
+```
+
+---
+
+## 개발 배경
+
+모던 자바스크립트와 Canvas API를 직접 연습하기 위해 시작한 프로젝트입니다. 충돌 판정, 탄도 물리, 바람 시뮬레이션, 데미지 계산, 적 스폰 등 모든 요소를 외부 코드 참조 없이 직접 설계하고 구현했습니다. 게임 스테이트 머신 패턴은 책을 참고했으나, 내용을 완전히 이해한 후 프로젝트에 맞게 적용했습니다.
+
+FYI. 2026년부터는 클로드코드를 사용하여 게임을 더 개선했습니다.
