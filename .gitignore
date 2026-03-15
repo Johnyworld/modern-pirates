@@ -2,3 +2,4 @@ node_modules
 dist
 /psd
 .vercel
+.DS_Store
